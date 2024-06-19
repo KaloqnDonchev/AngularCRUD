@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { validateUser } from '../../utils/user-utils';
 
 @Component({
   selector: 'app-edit-user',
@@ -21,6 +22,8 @@ export class EditUserComponent implements OnInit {
     gender: '',
     dateOfBirth: new Date()
   };
+  genders: string[] = ['Male', 'Female', 'Other'];
+  selectedGenderLabel: string = 'Please select';
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +36,7 @@ export class EditUserComponent implements OnInit {
     const foundUser = this.userService.getUserById(id);
     if (foundUser) {
       this.user = foundUser;
+      this.selectedGenderLabel = this.user.gender;
     } else {
       alert('User not found!');
       this.router.navigate(['/']);
@@ -40,24 +44,13 @@ export class EditUserComponent implements OnInit {
   }
 
   updateUser(): void {
-    if (this.validateUser(this.user)) {
+    if (validateUser(this.user)) {
       this.userService.updateUser(this.user);
       alert('User updated successfully!');
       this.router.navigate(['/']);
     } else {
       alert('Please fill in all fields correctly.');
     }
-  }
-
-  validateUser(user: User): boolean {
-    const namePattern = /^[A-Za-z\s]+$/;
-    return user.firstName.trim() !== '' &&
-           user.lastName.trim() !== '' &&
-           user.profession.trim() !== '' &&
-           user.gender !== '' &&
-           user.dateOfBirth !== null &&
-           namePattern.test(user.firstName) &&
-           namePattern.test(user.lastName);
   }
 
   onFileSelected(event: any): void {
@@ -69,5 +62,10 @@ export class EditUserComponent implements OnInit {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  selectGender(gender: string): void {
+    this.user.gender = gender;
+    this.selectedGenderLabel = gender;
   }
 }

@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { validateUser } from '../../utils/user-utils';
 
 @Component({
   selector: 'app-add-user',
@@ -21,28 +22,19 @@ export class AddUserComponent {
     gender: '',
     dateOfBirth: new Date()
   };
+  genders: string[] = ['Male', 'Female', 'Other'];
+  selectedGenderLabel: string = 'Please select';
 
   constructor(private userService: UserService, public router: Router) {}
 
   addUser(): void {
-    if (this.validateUser(this.user)) {
+    if (validateUser(this.user)) {
       this.userService.addUser(this.user);
       alert('User added successfully!');
       this.router.navigate(['/']);
     } else {
       alert('Please fill in all fields correctly.');
     }
-  }
-
-  validateUser(user: User): boolean {
-    const namePattern = /^[A-Za-z\s]+$/;
-    return user.firstName.trim() !== '' &&
-           user.lastName.trim() !== '' &&
-           user.profession.trim() !== '' &&
-           user.gender !== '' &&
-           user.dateOfBirth !== null &&
-           namePattern.test(user.firstName) &&
-           namePattern.test(user.lastName);
   }
 
   onFileSelected(event: any): void {
@@ -54,5 +46,10 @@ export class AddUserComponent {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  selectGender(gender: string): void {
+    this.user.gender = gender;
+    this.selectedGenderLabel = gender;
   }
 }

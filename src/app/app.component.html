@@ -5,9 +5,11 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/add-user">Add User</a>
-      </li>
+      @if(showFooterAndAddUser){
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/add-user">Add User</a>
+        </li>
+      }
     </ul>
   </div>
 </nav>
@@ -16,7 +18,7 @@
   <router-outlet></router-outlet>
 </div>
 
-@if(showFooter){
+@if(showFooterAndAddUser){
   <footer class="footer mt-auto py-3 bg-light">
     <div class="container">
       <span class="text-muted">User Management App © 2023</span>

@@ -15,12 +15,14 @@
     </div>
     <div class="form-group">
       <label for="gender">Gender</label>
-      <select class="form-control" id="gender" [(ngModel)]="user.gender" name="gender" required>
-        <option value="" disabled selected>Please select</option>
-        <option value="Male">Male</option>
-        <option value="Female">Female</option>
-        <option value="Other">Other</option>
-      </select>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="genderDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ selectedGenderLabel }}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="genderDropdown">
+          <a class="dropdown-item" *ngFor="let gender of genders" (click)="selectGender(gender)">{{ gender }}</a> 
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="dateOfBirth">Date of Birth</label>

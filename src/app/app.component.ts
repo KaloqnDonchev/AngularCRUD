@@ -9,14 +9,14 @@ import { NavigationEnd, Router, RouterModule } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  showFooter = true;
+  showFooterAndAddUser = true;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.showFooter = !event.url.includes('/edit-user');
+        this.showFooterAndAddUser = !event.url.includes('/edit-user');
       }
     });
   }
