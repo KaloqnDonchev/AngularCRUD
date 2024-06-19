@@ -26,6 +26,7 @@
       <label for="dateOfBirth">Date of Birth</label>
       <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
     </div>
+    <input type="file" (change)="onFileSelected($event)">
     <button type="submit" class="btn btn-primary">Update User</button>
     <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">Cancel</button>
   </form>

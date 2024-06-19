@@ -44,4 +44,15 @@ export class AddUserComponent {
            namePattern.test(user.firstName) &&
            namePattern.test(user.lastName);
   }
+
+  onFileSelected(event: any): void {
+    if (event.target.files) {
+      const file: File = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.user.image = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
 }

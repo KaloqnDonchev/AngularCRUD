@@ -2,6 +2,7 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
+        <th>Profile image</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Profession</th>
@@ -13,6 +14,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
+        <td>
+          <img *ngIf="user.image" [src]="user.image" alt="User Image" class="user-image">
+          <span *ngIf="!user.image">No Image</span>
+        </td>
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.profession }}</td>
