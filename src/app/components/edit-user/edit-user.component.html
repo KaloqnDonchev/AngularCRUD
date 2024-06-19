@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Edit User</h2>
+  <form (ngSubmit)="updateUser()">
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
+    </div>
+    <div class="form-group">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
+    </div>
+    <div class="form-group">
+      <label for="profession">Profession</label>
+      <input type="text" class="form-control" id="profession" [(ngModel)]="user.profession" name="profession" required>
+    </div>
+    <div class="form-group">
+      <label for="gender">Gender</label>
+      <select class="form-control" id="gender" [(ngModel)]="user.gender" name="gender" required>
+        <option value="" disabled>Please select</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="dateOfBirth">Date of Birth</label>
+      <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update User</button>
+    <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">Cancel</button>
+  </form>
+</div>

@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Profession</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Age</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.profession }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.dateOfBirth | date: 'shortDate' }}</td>
+        <td>{{ calculateAge(user.dateOfBirth) }}</td>
+        <td>
+          <a [routerLink]="['/edit-user', user.id]" class="btn btn-primary btn-sm">Edit</a>
+          <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
