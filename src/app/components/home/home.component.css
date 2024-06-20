@@ -6,3 +6,46 @@
     display:block;
     margin:auto;
 }
+
+.table-responsive {
+    overflow-x: auto;
+  }
+  
+  @media (max-width: 767.98px) {
+    .table {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .table thead {
+      display: none;
+    }
+  
+    .table tbody {
+      display: flex;
+      flex-direction: column;
+    }
+  
+    .table tbody tr {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid;
+      border-color: inherit;
+      margin-bottom: 1.5rem;
+    }
+  
+    .table tbody tr td {
+      display: flex;
+      justify-content: space-evenly;
+      padding: 0.5rem 0;
+      border: 1px solid;
+      border-color: inherit;;
+    }
+  
+    .table tbody tr td::before {
+      content: attr(data-label);
+      font-weight: bold;
+      flex: 1;
+    }
+  }
+  

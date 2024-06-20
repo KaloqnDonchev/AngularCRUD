@@ -1,34 +1,37 @@
-<div class="table-responsive">
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Profile image</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Profession</th>
-        <th>Gender</th>
-        <th>Date of Birth</th>
-        <th>Age</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>
-          <img *ngIf="user.image" [src]="user.image" alt="User Image" class="user-image">
-          <span *ngIf="!user.image">No Image</span>
-        </td>
-        <td>{{ user.firstName }}</td>
-        <td>{{ user.lastName }}</td>
-        <td>{{ user.profession }}</td>
-        <td>{{ user.gender }}</td>
-        <td>{{ user.dateOfBirth | date: 'shortDate' }}</td>
-        <td>{{ calculateAge(user.dateOfBirth) }}</td>
-        <td>
-          <a [routerLink]="['/edit-user', user.id]" class="btn btn-primary btn-sm">Edit</a>
-          <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover" *ngIf="users.length > 0">
+      <thead>
+        <tr>
+          <th>Profile image</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Profession</th>
+          <th>Gender</th>
+          <th>Date of Birth</th>
+          <th>Age</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td data-label="Profile image">
+            <img *ngIf="user.image" [src]="user.image" alt="User Image" class="user-image">
+            <span *ngIf="!user.image">No Image</span>
+          </td>
+          <td data-label="First Name">{{ user.firstName }}</td>
+          <td data-label="Last Name">{{ user.lastName }}</td>
+          <td data-label="Profession">{{ user.profession }}</td>
+          <td data-label="Gender">{{ user.gender }}</td>
+          <td data-label="Date of Birth">{{ user.dateOfBirth | date: 'shortDate' }}</td>
+          <td data-label="Age">{{ calculateAge(user.dateOfBirth) }}</td>
+          <td data-label="Actions">
+            <a [routerLink]="['/edit-user', user.id]" class="btn btn-primary btn-sm">Edit</a>
+            <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+      <p *ngIf="users.length === 0">No users available.</p>
+  </div>
 </div>

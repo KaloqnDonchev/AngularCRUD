@@ -5,7 +5,15 @@ import { User } from '../models/user.model';
   providedIn: 'root'
 })
 export class UserService {
-  private users: User[] = [];
+  private users: User[] = [{
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    profession: 'Software Engineer',
+    gender: 'Male',
+    dateOfBirth: new Date(1990, 0, 1),
+    image: 'https://www.theladders.com/wp-content/uploads/man_outside_091318.jpg'
+  }];
   private nextId = 1;
 
   getUsers(): User[] {
