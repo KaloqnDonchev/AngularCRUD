@@ -1,7 +1,7 @@
 import { User } from '../models/user.model';
 
 export function validateUser(user: User): boolean {
-    const namePattern = /^[A-Za-z\s]+$/;
+    const namePattern = /^[a-zA-Zа-яА-ЯёЁ]+$/;
 
     if (user.firstName.trim() === '' ||
         user.lastName.trim() === '' ||

@@ -20,7 +20,10 @@
           {{ selectedGenderLabel }}
         </button>
         <div class="dropdown-menu" aria-labelledby="genderDropdown">
-          <a class="dropdown-item" *ngFor="let gender of genders" (click)="selectGender(gender)">{{ gender }}</a> 
+          <ng-container *ngFor="let gender of genders; let i = index">
+            <a class="dropdown-item" (click)="selectGender(gender)">{{ gender }}</a>
+            <div *ngIf="i < genders.length - 1" class="dropdown-divider"></div>
+          </ng-container>
         </div>
       </div>
     </div>

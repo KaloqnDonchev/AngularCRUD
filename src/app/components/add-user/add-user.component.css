@@ -1,0 +1,8 @@
+.dropdown-item:hover {
+    background-color: #d67bed;
+    font-weight: 500;
+}
+
+.dropdown-divider {
+    margin: 0;
+}
