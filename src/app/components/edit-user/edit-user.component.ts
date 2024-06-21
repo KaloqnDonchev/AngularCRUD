@@ -15,7 +15,7 @@ import { validateUser } from '../../utils/user-utils';
 })
 export class EditUserComponent implements OnInit {
   user: User = {
-    id: 0,
+    id: "",
     firstName: '',
     lastName: '',
     profession: '',
@@ -32,7 +32,7 @@ export class EditUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = +this.route.snapshot.paramMap.get('id')!;
+    const id = this.route.snapshot.paramMap.get('id')!;
     const foundUser = this.userService.getUserById(id);
     if (foundUser) {
       this.user = foundUser;

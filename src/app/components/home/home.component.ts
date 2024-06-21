@@ -17,14 +17,14 @@ export class HomeComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  ngOnInit(): void {
-    this.users = this.userService.getUsers();
+  async ngOnInit(): Promise<void> {
+    this.users = await this.userService.getUsers();
   }
 
-  deleteUser(id: number): void {
+  async deleteUser(id: string): Promise<void> {
     if (confirm('Are you sure you want to delete this user?')) {
-      this.userService.deleteUser(id);
-      this.users = this.userService.getUsers();
+      await this.userService.deleteUser(id);
+      this.users = await this.userService.getUsers();
     }
   }
 

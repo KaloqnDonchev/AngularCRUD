@@ -15,7 +15,7 @@ import { validateUser } from '../../utils/user-utils';
 })
 export class AddUserComponent {
   user: User = {
-    id: 0,
+    id: '',
     firstName: '',
     lastName: '',
     profession: '',
