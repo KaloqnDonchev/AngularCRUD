@@ -1,4 +1,8 @@
 <div class="container">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="wrongInformation">
+    Please fill in all fields correctly.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   <h2>Add User</h2>
   <form (ngSubmit)="addUser()">
     <div class="form-group">
@@ -31,7 +35,7 @@
       <label for="dateOfBirth">Date of Birth</label>
       <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
     </div>
-    <input type="file" (change)="onFileSelected($event)">
+    <input class="image-upload" type="file" (change)="onFileSelected($event)">
     <button type="submit" class="btn btn-primary">Add User</button>
     <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">Cancel</button>
   </form>

@@ -24,6 +24,7 @@ export class EditUserComponent implements OnInit {
   };
   genders: string[] = ['Male', 'Female', 'Other'];
   selectedGenderLabel: string = 'Please select';
+  wrongInformation: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,10 +47,9 @@ export class EditUserComponent implements OnInit {
   updateUser(): void {
     if (validateUser(this.user)) {
       this.userService.updateUser(this.user);
-      alert('User updated successfully!');
       this.router.navigate(['/']);
     } else {
-      alert('Please fill in all fields correctly.');
+      this.wrongInformation = true;
     }
   }
 

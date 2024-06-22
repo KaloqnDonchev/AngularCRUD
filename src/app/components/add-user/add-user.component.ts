@@ -24,16 +24,16 @@ export class AddUserComponent {
   };
   genders: string[] = ['Male', 'Female', 'Other'];
   selectedGenderLabel: string = 'Please select';
+  wrongInformation: boolean = false;
 
   constructor(private userService: UserService, public router: Router) {}
 
   addUser(): void {
     if (validateUser(this.user)) {
       this.userService.addUser(this.user);
-      alert('User added successfully!');
       this.router.navigate(['/']);
     } else {
-      alert('Please fill in all fields correctly.');
+      this.wrongInformation = true;
     }
   }
 
