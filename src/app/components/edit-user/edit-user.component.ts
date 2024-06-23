@@ -5,6 +5,7 @@ import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { validateUser } from '../../utils/user-utils';
+import { onFileSelected } from '../../utils/user-utils';
 
 @Component({
   selector: 'app-edit-user',
@@ -30,7 +31,7 @@ export class EditUserComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     public router: Router
-  ) {}
+  ) {};
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
@@ -41,8 +42,8 @@ export class EditUserComponent implements OnInit {
     } else {
       alert('User not found!');
       this.router.navigate(['/']);
-    }
-  }
+    };
+  };
 
   updateUser(): void {
     if (validateUser(this.user)) {
@@ -50,22 +51,15 @@ export class EditUserComponent implements OnInit {
       this.router.navigate(['/']);
     } else {
       this.wrongInformation = true;
-    }
-  }
+    };
+  };
 
-  onFileSelected(event: any): void {
-    if (event.target.files) {
-      const file: File = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.user.image = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+  handleFileSelected(event: any): void {
+    onFileSelected(event, this.user);
+  };
 
   selectGender(gender: string): void {
     this.user.gender = gender;
     this.selectedGenderLabel = gender;
-  }
-}
+  };
+};

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { validateUser } from '../../utils/user-utils';
+import { onFileSelected } from '../../utils/user-utils';
 
 @Component({
   selector: 'app-add-user',
@@ -26,7 +27,7 @@ export class AddUserComponent {
   selectedGenderLabel: string = 'Please select';
   wrongInformation: boolean = false;
 
-  constructor(private userService: UserService, public router: Router) {}
+  constructor(private userService: UserService, public router: Router) {};
 
   addUser(): void {
     if (validateUser(this.user)) {
@@ -34,22 +35,15 @@ export class AddUserComponent {
       this.router.navigate(['/']);
     } else {
       this.wrongInformation = true;
-    }
-  }
+    };
+  };
 
-  onFileSelected(event: any): void {
-    if (event.target.files) {
-      const file: File = event.target.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.user.image = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+  handleFileSelected(event: any): void {
+    onFileSelected(event, this.user);
+  };
 
   selectGender(gender: string): void {
     this.user.gender = gender;
     this.selectedGenderLabel = gender;
-  }
-}
+  };
+};

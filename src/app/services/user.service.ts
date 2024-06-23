@@ -12,11 +12,11 @@ export class UserService {
     .then(response => response.json())
     .then(users => this.users = users);
     return this.users;
-  }
+  };
 
   getUserById(id: string): User | undefined {
     return this.users.find(user => user.id === id);
-  }
+  };
 
   async addUser(user: Partial<User>): Promise<void> {
     delete user.id;
@@ -30,7 +30,7 @@ export class UserService {
       console.error('Error:', error);
       return null;
     });
-  }
+  };
 
   async updateUser(user: User): Promise<void> {
     await fetch(`http://localhost:3000/users/${user.id}`, {
@@ -48,7 +48,7 @@ export class UserService {
       console.error('Error:', error);
       return null;
     });
-  }
+  };
 
   async deleteUser(id: string): Promise<void> {
     await fetch(`http://localhost:3000/users/${id}`, {
@@ -62,5 +62,5 @@ export class UserService {
       console.error('Error:', error);
       return null;
     });
-  }
-}
+  };
+};
