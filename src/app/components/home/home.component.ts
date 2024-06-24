@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   pageSize: number = 10;
   totalPages: number = 1;
   pages: number[] = [];
+  userIdToDelete: string | null = null;
 
   constructor(private userService: UserService) {};
 
@@ -37,9 +38,31 @@ export class HomeComponent implements OnInit {
     this.paginatedUsers = this.users.slice(startIndex, endIndex);
   };
 
-  async deleteUser(id: string): Promise<void> {
-    if (confirm('Are you sure you want to delete this user?')) {
-      await this.userService.deleteUser(id);
+  openDeleteModal(userId: string): void {
+    this.userIdToDelete = userId;
+    const modalElement = document.getElementById('deleteConfirmationModal');
+    if (modalElement) {
+      modalElement.classList.add('show');
+      modalElement.style.display = 'block';
+      modalElement.removeAttribute('aria-hidden');
+      modalElement.setAttribute('aria-modal', 'true');
+    };
+  };
+
+  closeModal(): void {
+    const modalElement = document.getElementById('deleteConfirmationModal');
+    if (modalElement) {
+      modalElement.classList.remove('show');
+      modalElement.style.display = 'none';
+      modalElement.setAttribute('aria-hidden', 'true');
+      modalElement.removeAttribute('aria-modal');
+    };
+  };
+
+  async confirmDelete(): Promise<void> {
+    if (this.userIdToDelete !== null) {
+      await this.userService.deleteUser(this.userIdToDelete);
+      this.userIdToDelete = null;
       this.users = await this.userService.getUsers();
       this.totalPages = Math.ceil(this.users.length / this.pageSize);
       this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);   // generates an array of page numbers for iterating in pagination
@@ -47,6 +70,7 @@ export class HomeComponent implements OnInit {
         this.currentPage = this.totalPages;
       }
       this.setPage(this.currentPage);
+      this.closeModal();
     };
   };
 
