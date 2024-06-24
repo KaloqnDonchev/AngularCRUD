@@ -4,7 +4,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
   <h2>Edit User</h2>
-  <form (ngSubmit)="updateUser()">
+  <form class="form-container" (ngSubmit)="updateUser()">
     <div class="form-group">
       <label for="firstName">First Name</label>
       <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
@@ -32,8 +32,11 @@
       <label for="dateOfBirth">Date of Birth</label>
       <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
     </div>
+    <label>Select an image</label>
     <input type="file" (change)="handleFileSelected($event)">
-    <button type="submit" class="btn btn-primary">Update User</button>
-    <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">Cancel</button>
+    <div class="buttons-container">
+      <button type="submit" class="btn btn-primary">Update User</button>
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">Cancel</button>
+    </div>
   </form>
 </div>
