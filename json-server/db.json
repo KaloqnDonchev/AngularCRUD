@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "b123",
-      "firstName": "Johnatan",
+      "firstName": "Joe",
       "lastName": "Doe",
       "profession": "Software Engineer",
       "gender": "Male",
@@ -119,6 +119,14 @@
       "profession": "Business Analyst",
       "gender": "Female",
       "dateOfBirth": "1996-03-31"
+    },
+    {
+      "id": "e117",
+      "firstName": "Ivan",
+      "lastName": "Smith",
+      "profession": "Manager",
+      "gender": "Male",
+      "dateOfBirth": "1993-02-02"
     }
   ]
 }

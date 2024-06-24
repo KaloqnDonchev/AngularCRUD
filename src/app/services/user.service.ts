@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { BACKEND_ENDPOINT } from '../constants/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class UserService {
   private users: User[] = [];
 
   async getUsers(): Promise<User[]> {
-    await fetch("http://localhost:3000/users")
+    await fetch(BACKEND_ENDPOINT)
     .then(response => response.json())
     .then(users => this.users = users);
     return this.users;
@@ -20,7 +21,7 @@ export class UserService {
 
   async addUser(user: Partial<User>): Promise<void> {
     delete user.id;
-    await fetch(`http://localhost:3000/users`, {
+    await fetch(BACKEND_ENDPOINT, {
       method: 'POST',
       body: JSON.stringify(user),
     })
@@ -33,7 +34,7 @@ export class UserService {
   };
 
   async updateUser(user: User): Promise<void> {
-    await fetch(`http://localhost:3000/users/${user.id}`, {
+    await fetch(`${BACKEND_ENDPOINT}/${user.id}`, {
       method: 'PATCH',
       body: JSON.stringify(user),
     })
@@ -51,7 +52,7 @@ export class UserService {
   };
 
   async deleteUser(id: string): Promise<void> {
-    await fetch(`http://localhost:3000/users/${id}`, {
+    await fetch(`${BACKEND_ENDPOINT}/${id}`, {
       method: 'DELETE'
     })
     .then(res => res.json())
