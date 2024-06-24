@@ -1,27 +1,66 @@
-# AngularCrudApp
+# Angular CRUD App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+This project is a simple Angular CRUD (Create, Read, Update, Delete) application that manages user data. It demonstrates how to perform basic operations like adding, viewing, editing, and deleting users, as well as implementing pagination and handling file uploads.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Components](#components)
+- [Services](#services)
+- [Utilities](#utilities)
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Add a new user with details like first name, last name, profession, gender, date of birth, and profile image.
+- View a list of users with pagination.
+- Edit user details.
+- Delete a user.
+- Display alerts for validation errors and other notifications.
+- Responsive and mobile-friendly UI using Bootstrap.
 
-## Build
+## Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone the repository:
 
-## Running unit tests
+    ```sh
+    git clone https://github.com/your-username/angular-crud-app.git
+    cd angular-crud-app
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Install the dependencies:
 
-## Running end-to-end tests
+    ```sh
+    npm install
+    ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Usage
 
-## Further help
+1. Start the development server:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+    ```sh
+    npm run start
+    ```
+2. Start the json-server (backend)
+   ```sh
+    npm run start-server
+    ```
+
+4. Open your browser and navigate to `http://localhost:4200/`.
+
+
+## Components
+
+- `AddUserComponent`: Form to add a new user.
+- `EditUserComponent`: Form to edit an existing user.
+- `HomeComponent`: Displays the list of users with pagination and actions to edit or delete.
+
+## Services
+
+- `UserService`: Manages user data and provides methods to add, get, update, and delete users.
+
+## Utilities
+
+- `user-utils.ts`: Utility functions for user data validation.
+
