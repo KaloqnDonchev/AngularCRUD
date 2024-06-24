@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { User } from '../models/user.model';
 import { BACKEND_ENDPOINT } from '../constants/constants';
 
@@ -7,6 +7,7 @@ import { BACKEND_ENDPOINT } from '../constants/constants';
 })
 export class UserService {
   private users: User[] = [];
+  userAdded: EventEmitter<User> = new EventEmitter<User>();
 
   async getUsers(): Promise<User[]> {
     await fetch(BACKEND_ENDPOINT)
@@ -26,7 +27,10 @@ export class UserService {
       body: JSON.stringify(user),
     })
     .then(res => res.json())
-    .then(newUser => this.users.push(newUser))
+    .then((newUser) => {
+      this.userAdded.emit(newUser);
+      this.users.push(newUser);
+    })
     .catch(error => {
       console.error('Error:', error);
       return null;
