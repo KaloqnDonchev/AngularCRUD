@@ -7,7 +7,8 @@ import { BACKEND_ENDPOINT } from '../constants/constants';
 })
 export class UserService {
   private users: User[] = [];
-  userAdded: EventEmitter<User> = new EventEmitter<User>();
+  userChanged: EventEmitter<{ user: User, message: string }> = new EventEmitter<{ user: User, message: string }>();
+
 
   async getUsers(): Promise<User[]> {
     await fetch(BACKEND_ENDPOINT)
@@ -28,8 +29,8 @@ export class UserService {
     })
     .then(res => res.json())
     .then((newUser) => {
-      this.userAdded.emit(newUser);
       this.users.push(newUser);
+      this.userChanged.emit({ user: newUser, message: 'User added successfully!' });
     })
     .catch(error => {
       console.error('Error:', error);
@@ -47,6 +48,7 @@ export class UserService {
       const index = this.users.findIndex(u => u.id === user.id);  // if no element matches findIndex it returns "-1"
       if (index > -1) {
         this.users[index] = user;
+        this.userChanged.emit({ user: user, message: 'User updated successfully!' });
       }
     })
     .catch(error => {

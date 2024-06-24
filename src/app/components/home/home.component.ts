@@ -25,8 +25,8 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService) {};
 
   async ngOnInit(): Promise<void> {
-    this.userService.userAdded.subscribe(() => {
-      this.successMessage = 'User added successfully!';
+    this.userService.userChanged.subscribe(({ user, message }) => {
+      this.successMessage = message;
     });
     this.users = await this.userService.getUsers();
     this.totalPages = Math.ceil(this.users.length / this.pageSize);
