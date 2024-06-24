@@ -19,9 +19,9 @@ export class AddUserComponent {
     id: '',
     firstName: '',
     lastName: '',
-    profession: '',
+    profession: '', 
     gender: '',
-    dateOfBirth: new Date()
+    dateOfBirth: new Date('')
   };
   genders: string[] = ['Male', 'Female', 'Other'];
   selectedGenderLabel: string = 'Please select';
