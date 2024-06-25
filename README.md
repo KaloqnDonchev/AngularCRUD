@@ -9,7 +9,6 @@ This project is a simple Angular CRUD (Create, Read, Update, Delete) application
 - [Usage](#usage)
 - [Components](#components)
 - [Services](#services)
-- [Utilities](#utilities)
 
 ## Features
 
@@ -59,8 +58,4 @@ This project is a simple Angular CRUD (Create, Read, Update, Delete) application
 ## Services
 
 - `UserService`: Manages user data and provides methods to add, get, update, and delete users.
-
-## Utilities
-
-- `user-utils.ts`: Utility functions for user data validation.
 

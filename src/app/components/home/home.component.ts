@@ -30,7 +30,9 @@ export class HomeComponent implements OnInit {
     });
     this.users = await this.userService.getUsers();
     this.totalPages = Math.ceil(this.users.length / this.pageSize);
-    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
+    for (let i = 1; i <= this.totalPages; i++) {
+      this.pages.push(i);
+    }
     this.setPage(this.currentPage);
   };
 
@@ -69,7 +71,10 @@ export class HomeComponent implements OnInit {
       this.userIdToDelete = null;
       this.users = await this.userService.getUsers();
       this.totalPages = Math.ceil(this.users.length / this.pageSize);
-      this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);   // generates an array of page numbers for iterating in pagination
+      this.pages = [];
+      for (let i = 1; i <= this.totalPages; i++) {
+        this.pages.push(i);
+      }
       if (this.currentPage > this.totalPages) {   // e.g. deleting the last user on the last page
         this.currentPage = this.totalPages;
       }
