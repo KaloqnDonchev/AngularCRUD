@@ -1,6 +1,6 @@
 import { User } from '../models/user.model';
 
-export function validateUser(user: User): boolean {
+export function validateUser(user: User): string {
     const namePattern = /^[a-zA-Zа-яА-ЯёЁ]+$/;
 
     if (user.firstName.trim() === '' ||
@@ -8,21 +8,22 @@ export function validateUser(user: User): boolean {
         user.profession.trim() === '' ||
         user.gender === '' ||
         user.dateOfBirth === null) {
-        return false;
+        return "Please fill all the fields";
     };
 
     if (!namePattern.test(user.firstName) || !namePattern.test(user.lastName)) {
-        return false;
+        return "Please enter a valid name";
     };
 
     // Validate date of birth format and if it is a past date
     const today = new Date();
     const dateOfBirth = new Date(user.dateOfBirth);
+    console.log(dateOfBirth);
     if (isNaN(dateOfBirth.getTime()) || dateOfBirth >= today) {
-        return false;
+        return "Please enter a valid date of birth";
     };
 
-    return true;
+    return "valid";
 }
 
 export function onFileSelected(event: any, user: any): void {
