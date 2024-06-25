@@ -40,7 +40,6 @@ export class EditUserComponent implements OnInit {
       this.user = foundUser;
       this.selectedGenderLabel = this.user.gender;
     } else {
-      alert('User not found!');
       this.router.navigate(['/']);
     };
   };

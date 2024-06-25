@@ -18,7 +18,6 @@ export function validateUser(user: User): string {
     // Validate date of birth format and if it is a past date
     const today = new Date();
     const dateOfBirth = new Date(user.dateOfBirth);
-    console.log(dateOfBirth);
     if (isNaN(dateOfBirth.getTime()) || dateOfBirth >= today) {
         return "Please enter a valid date of birth";
     };
