@@ -3,39 +3,52 @@
     {{ wrongInformation }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   </div>
+  
   <h2>Edit User</h2>
+  
   <form class="form-container" (ngSubmit)="updateUser()">
-    <div class="form-group">
-      <label for="firstName">First Name</label>
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
       <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
     </div>
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
+    
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
       <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
     </div>
-    <div class="form-group">
-      <label for="profession">Profession</label>
+    
+    <div class="mb-3">
+      <label for="profession" class="form-label">Profession</label>
       <input type="text" class="form-control" id="profession" [(ngModel)]="user.profession" name="profession" required>
     </div>
-    <div class="form-group">
-      <label for="gender">Gender</label>
+    
+    <div class="mb-3">
+      <label class="form-label">Gender</label>
       <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="genderDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{ selectedGenderLabel }}
         </button>
-        <div class="dropdown-menu" aria-labelledby="genderDropdown">
-          <a class="dropdown-item" *ngFor="let gender of genders" (click)="selectGender(gender)">{{ gender }}</a>
-        </div>
+        <ul class="dropdown-menu" aria-labelledby="genderDropdown">
+          <li *ngFor="let gender of genders">
+            <a class="dropdown-item" (click)="selectGender(gender)">{{ gender }}</a>
+          </li>
+        </ul>
       </div>
     </div>
-    <div class="form-group">
-      <label for="dateOfBirth">Date of Birth</label>
+    
+    <div class="mb-3">
+      <label for="dateOfBirth" class="form-label">Date of Birth</label>
       <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
     </div>
-    <label>Select an image</label>
-    <input type="file" (change)="handleFileSelected($event)">
-    <div class="buttons-container">
-      <button type="submit" class="btn btn-primary">Update User</button>
+    
+    <div class="mb-3">
+      <label class="form-label">Select an image</label>
+      <input type="file" class="form-control" (change)="handleFileSelected($event)">
+    </div>
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary me-2">Update User</button>
       <button type="button" class="btn btn-secondary" (click)="router.navigate(['/'])">Cancel</button>
     </div>
   </form>

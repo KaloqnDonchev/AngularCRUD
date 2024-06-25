@@ -80,6 +80,7 @@ export class HomeComponent implements OnInit {
       }
       this.setPage(this.currentPage);
       this.closeModal();
+      this.successMessage = 'User deleted successfully!';
     };
   };
 
