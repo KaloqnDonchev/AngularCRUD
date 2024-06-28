@@ -10,22 +10,22 @@
     <form class="form-container" (ngSubmit)="isEditMode ? updateUser() : addUser()">
   
       <div class="mb-3">
-        <label for="firstName" class="form-label">First Name <span class="text-danger">*</span></label>
+        <label for="firstName" class="form-label">First Name <span *ngIf="!isEditMode" class="text-danger">*</span></label>
         <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
       </div>
   
       <div class="mb-3">
-        <label for="lastName" class="form-label">Last Name <span class="text-danger">*</span></label>
+        <label for="lastName" class="form-label">Last Name <span *ngIf="!isEditMode" class="text-danger">*</span></label>
         <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
       </div>
   
       <div class="mb-3">
-        <label for="profession" class="form-label">Profession <span class="text-danger">*</span></label>
+        <label for="profession" class="form-label">Profession <span *ngIf="!isEditMode" class="text-danger">*</span></label>
         <input type="text" class="form-control" id="profession" [(ngModel)]="user.profession" name="profession" required>
       </div>
   
       <div class="mb-3">
-        <label class="form-label">Gender <span class="text-danger">*</span></label>
+        <label class="form-label">Gender <span *ngIf="!isEditMode" class="text-danger">*</span></label>
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="genderDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {{ selectedGenderLabel }}
@@ -39,7 +39,7 @@
       </div>
   
       <div class="mb-3">
-        <label for="dateOfBirth" class="form-label">Date of Birth <span class="text-danger">*</span></label>
+        <label for="dateOfBirth" class="form-label">Date of Birth <span *ngIf="!isEditMode" class="text-danger">*</span></label>
         <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
       </div>
   
