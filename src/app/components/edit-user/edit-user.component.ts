@@ -4,8 +4,7 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { validateUser } from '../../utils/user-utils';
-import { onFileSelected } from '../../utils/user-utils';
+import { UserUtils } from '../../utils/user-utils';
 
 @Component({
   selector: 'app-edit-user',
@@ -31,7 +30,7 @@ export class EditUserComponent implements OnInit {
     private route: ActivatedRoute,
     private userService: UserService,
     public router: Router
-  ) {};
+  ) {}
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id')!;
@@ -41,24 +40,25 @@ export class EditUserComponent implements OnInit {
       this.selectedGenderLabel = this.user.gender;
     } else {
       this.router.navigate(['/']);
-    };
-  };
+    }
+  }
 
   updateUser(): void {
-    if (validateUser(this.user) === 'valid') {
+    const validationMessage = UserUtils.validateUser(this.user);
+    if (validationMessage === 'valid') {
       this.userService.updateUser(this.user);
       this.router.navigate(['/']);
     } else {
-      this.wrongInformation = validateUser(this.user);
-    };
-  };
+      this.wrongInformation = validationMessage;
+    }
+  }
 
   handleFileSelected(event: any): void {
-    onFileSelected(event, this.user);
-  };
+    UserUtils.onFileSelected(event, this.user);
+  }
 
   selectGender(gender: string): void {
     this.user.gender = gender;
     this.selectedGenderLabel = gender;
-  };
-};
+  }
+}

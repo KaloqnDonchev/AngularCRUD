@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   userIdToDelete: string | null = null;
   successMessage: string = '';
 
-  constructor(private userService: UserService) {};
+  constructor(private userService: UserService) {}
 
   async ngOnInit(): Promise<void> {
     this.userService.userChanged.subscribe(({ user, message }) => {
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
       this.pages.push(i);
     }
     this.setPage(this.currentPage);
-  };
+  }
 
   setPage(page: number): void {
     if (page < 1 || page > this.totalPages) return;
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
     const startIndex = (page - 1) * this.pageSize;
     const endIndex = startIndex + this.pageSize;
     this.paginatedUsers = this.users.slice(startIndex, endIndex);
-  };
+  }
 
   openDeleteModal(userId: string): void {
     this.userIdToDelete = userId;
@@ -52,8 +52,8 @@ export class HomeComponent implements OnInit {
       modalElement.style.display = 'block';
       modalElement.removeAttribute('aria-hidden');
       modalElement.setAttribute('aria-modal', 'true');
-    };
-  };
+    }
+  }
 
   closeModal(): void {
     const modalElement = document.getElementById('deleteConfirmationModal');
@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
       modalElement.style.display = 'none';
       modalElement.setAttribute('aria-hidden', 'true');
       modalElement.removeAttribute('aria-modal');
-    };
-  };
+    }
+  }
 
   async confirmDelete(): Promise<void> {
     if (this.userIdToDelete !== null) {
@@ -81,8 +81,8 @@ export class HomeComponent implements OnInit {
       this.setPage(this.currentPage);
       this.closeModal();
       this.successMessage = 'User deleted successfully!';
-    };
-  };
+    }
+  }
 
   calculateAge(dateOfBirth: Date): number {
     const birthDate = new Date(dateOfBirth);
@@ -93,5 +93,5 @@ export class HomeComponent implements OnInit {
       age--;
     }
     return age;
-  };
-};
+  }
+}
