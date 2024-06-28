@@ -9,7 +9,7 @@ import { UserUtils } from '../../utils/user-utils';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.css'],
+  styleUrls: ['./user-form.component.scss'],
   standalone: true,
   imports: [CommonModule, FormsModule]
 })
