@@ -25,10 +25,7 @@ export class HomeComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.userChanged.subscribe(({ user, message }) => {
-      this.successMessage = message;
-      this.refreshUsers();
-    });
+    this.successMessage = this.userService.getSuccessMessage();
     this.refreshUsers();
   }
 

@@ -10,7 +10,7 @@ import { BACKEND_ENDPOINT } from '../constants/constants';
 })
 export class UserService {
   private users: User[] = [];
-  userChanged: EventEmitter<{ user: User, message: string }> = new EventEmitter<{ user: User, message: string }>();
+  private successMessage: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -35,7 +35,7 @@ export class UserService {
     return this.http.post<User>(BACKEND_ENDPOINT, user).pipe(
       map(newUser => {
         this.users.push(newUser);
-        this.userChanged.emit({ user: newUser, message: 'User added successfully!' });
+        this.successMessage = 'User added successfully!';
         return newUser;
       }),
       catchError(this.handleError)
@@ -48,7 +48,7 @@ export class UserService {
         const index = this.users.findIndex(u => u.id === user.id);
         if (index > -1) {
           this.users[index] = user;
-          this.userChanged.emit({ user: user, message: 'User updated successfully!' });
+          this.successMessage = 'User updated successfully!';
         }
       }),
       catchError(this.handleError)
@@ -62,6 +62,10 @@ export class UserService {
       }),
       catchError(this.handleError)
     );
+  }
+
+  getSuccessMessage(): string {
+    return this.successMessage;
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
