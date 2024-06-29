@@ -33,37 +33,38 @@ export class UserFormComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  async ngOnInit(): Promise<void> {           // check whether it needs else with nagivation
+  ngOnInit(): void {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
       this.isEditMode = true;
-      const user = this.userService.getUserById(userId);
-      if (user) {
-        this.user = user;
-        this.selectedGenderLabel = user.gender;
-      }
+      this.userService.getUserById(userId).subscribe(user => {
+        if (user) {
+          this.user = user;
+          this.selectedGenderLabel = user.gender;
+        }
+      });
     }
   }
 
-  async addUser(): Promise<void> {
+  addUser(): void {
     const validationMessage = UserUtils.validateUser(this.user);
     if (validationMessage === 'valid') {
-      await this.userService.addUser(this.user).catch(error => {
-        this.wrongInformation = 'An error occurred while adding the user.';
+      this.userService.addUser(this.user).subscribe({
+        next: () => this.router.navigate(['/']),
+        error: () => this.wrongInformation = 'An error occurred while adding the user.'
       });
-      this.router.navigate(['/']);
     } else {
       this.wrongInformation = validationMessage;
     }
   }
 
-  async updateUser(): Promise<void> {
+  updateUser(): void {
     const validationMessage = UserUtils.validateUser(this.user);
     if (validationMessage === 'valid') {
-      await this.userService.updateUser(this.user).catch(error => {
-        this.wrongInformation = 'An error occurred while updating the user.';
+      this.userService.updateUser(this.user).subscribe({
+        next: () => this.router.navigate(['/']),
+        error: () => this.wrongInformation = 'An error occurred while updating the user.'
       });
-      this.router.navigate(['/']);
     } else {
       this.wrongInformation = validationMessage;
     }

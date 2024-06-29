@@ -24,16 +24,24 @@ export class HomeComponent implements OnInit {
 
   constructor(private userService: UserService) {}
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.userService.userChanged.subscribe(({ user, message }) => {
       this.successMessage = message;
+      this.refreshUsers();
     });
-    this.users = await this.userService.getUsers();
-    this.totalPages = Math.ceil(this.users.length / this.pageSize);
-    for (let i = 1; i <= this.totalPages; i++) {
-      this.pages.push(i);
-    }
-    this.setPage(this.currentPage);
+    this.refreshUsers();
+  }
+
+  refreshUsers(): void {
+    this.userService.getUsers().subscribe(users => {
+      this.users = users;
+      this.totalPages = Math.ceil(this.users.length / this.pageSize);
+      this.pages = [];
+      for (let i = 1; i <= this.totalPages; i++) {
+        this.pages.push(i);
+      }
+      this.setPage(this.currentPage);
+    });
   }
 
   setPage(page: number): void {
@@ -65,22 +73,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  async confirmDelete(): Promise<void> {
+  confirmDelete(): void {
     if (this.userIdToDelete !== null) {
-      await this.userService.deleteUser(this.userIdToDelete);
-      this.userIdToDelete = null;
-      this.users = await this.userService.getUsers();
-      this.totalPages = Math.ceil(this.users.length / this.pageSize);
-      this.pages = [];
-      for (let i = 1; i <= this.totalPages; i++) {
-        this.pages.push(i);
-      }
-      if (this.currentPage > this.totalPages) {   // e.g. deleting the last user on the last page
-        this.currentPage = this.totalPages;
-      }
-      this.setPage(this.currentPage);
-      this.closeModal();
-      this.successMessage = 'User deleted successfully!';
+      this.userService.deleteUser(this.userIdToDelete).subscribe(() => {
+        this.refreshUsers();
+        this.closeModal();
+        this.successMessage = 'User deleted successfully!';
+      });
     }
   }
 
