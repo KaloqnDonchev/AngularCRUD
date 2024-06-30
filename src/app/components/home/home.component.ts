@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule]
+  imports: [CommonModule, RouterModule, FormsModule],
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
   }
 
   refreshUsers(): void {
-    this.userService.getUsers().subscribe(users => {
+    this.userService.getUsers().subscribe((users) => {
       this.users = users;
       this.totalPages = Math.ceil(this.users.length / this.pageSize);
       this.pages = [];
@@ -42,11 +42,12 @@ export class HomeComponent implements OnInit {
   }
 
   setPage(page: number): void {
-    if (page < 1 || page > this.totalPages) return;
-    this.currentPage = page;
-    const startIndex = (page - 1) * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedUsers = this.users.slice(startIndex, endIndex);
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      const startIndex = (page - 1) * this.pageSize;
+      const endIndex = startIndex + this.pageSize;
+      this.paginatedUsers = this.users.slice(startIndex, endIndex);
+    }
   }
 
   openDeleteModal(userId: string): void {
@@ -85,7 +86,10 @@ export class HomeComponent implements OnInit {
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+    if (
+      monthDifference < 0 ||
+      (monthDifference === 0 && today.getDate() < birthDate.getDate())
+    ) {
       age--;
     }
     return age;

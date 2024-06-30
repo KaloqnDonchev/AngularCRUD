@@ -5,13 +5,14 @@ import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UserUtils } from '../../utils/user-utils';
+import { FormValidationDirective } from '../../directives/form-validation.directive';
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
   styleUrls: ['./user-form.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, FormValidationDirective],
 })
 export class UserFormComponent implements OnInit {
   user: User = {
@@ -20,7 +21,7 @@ export class UserFormComponent implements OnInit {
     lastName: '',
     profession: '',
     gender: '',
-    dateOfBirth: new Date('')
+    dateOfBirth: new Date(''),
   };
   genders: string[] = ['Male', 'Female', 'Other'];
   selectedGenderLabel: string = 'Please select';
@@ -37,7 +38,7 @@ export class UserFormComponent implements OnInit {
     const userId = this.route.snapshot.paramMap.get('id');
     if (userId) {
       this.isEditMode = true;
-      this.userService.getUserById(userId).subscribe(user => {
+      this.userService.getUserById(userId).subscribe((user) => {
         if (user) {
           this.user = user;
           this.selectedGenderLabel = user.gender;
@@ -51,7 +52,8 @@ export class UserFormComponent implements OnInit {
     if (validationMessage === 'valid') {
       this.userService.addUser(this.user).subscribe({
         next: () => this.router.navigate(['/']),
-        error: () => this.wrongInformation = 'An error occurred while adding the user.'
+        error: () =>
+          (this.wrongInformation = 'An error occurred while adding the user.'),
       });
     } else {
       this.wrongInformation = validationMessage;
@@ -63,7 +65,9 @@ export class UserFormComponent implements OnInit {
     if (validationMessage === 'valid') {
       this.userService.updateUser(this.user).subscribe({
         next: () => this.router.navigate(['/']),
-        error: () => this.wrongInformation = 'An error occurred while updating the user.'
+        error: () =>
+          (this.wrongInformation =
+            'An error occurred while updating the user.'),
       });
     } else {
       this.wrongInformation = validationMessage;
@@ -72,6 +76,16 @@ export class UserFormComponent implements OnInit {
 
   handleFileSelected(event: any): void {
     UserUtils.onFileSelected(event, this.user);
+  }
+
+  handleSubmit(event: any): void {
+    if (!event?.target.checkValidity()) {
+      event.preventDefault();
+    } else if (this.isEditMode) {
+      this.updateUser();
+    } else {
+      this.addUser();
+    }
   }
 
   selectGender(gender: string): void {

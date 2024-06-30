@@ -7,21 +7,30 @@
   
     <h2>{{ isEditMode ? 'Edit User' : 'Add User' }}</h2>
   
-    <form class="form-container" (ngSubmit)="isEditMode ? updateUser() : addUser()">
+    <form class="form-container" (submit)="handleSubmit($event)">
   
       <div class="mb-3">
         <label for="firstName" class="form-label">First Name <span *ngIf="!isEditMode" class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
+        <input appFormValidation pattern="^[a-zA-Zа-яА-ЯёЁ]+$" type="text" class="form-control" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
+        <div class="invalid-feedback">
+          Please provide a valid name.
+        </div>
       </div>
   
       <div class="mb-3">
         <label for="lastName" class="form-label">Last Name <span *ngIf="!isEditMode" class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
+        <input appFormValidation pattern="^[a-zA-Zа-яА-ЯёЁ]+$" type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
+        <div class="invalid-feedback">
+          Please provide a valid last name.
+        </div>
       </div>
   
       <div class="mb-3">
         <label for="profession" class="form-label">Profession <span *ngIf="!isEditMode" class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="profession" [(ngModel)]="user.profession" name="profession" required>
+        <input appFormValidation type="text" class="form-control" id="profession" [(ngModel)]="user.profession" name="profession" required>
+        <div class="invalid-feedback">
+          Please provide a valid profession.
+        </div>
       </div>
   
       <div class="mb-3">
@@ -35,12 +44,19 @@
               <a class="dropdown-item" (click)="selectGender(gender)">{{ gender }}</a>
             </li>
           </ul>
+          <input appFormValidation class="d-none" type="text" [(ngModel)]="user.gender" name="gender" required>
+          <div class="invalid-feedback">
+            Please select a gender.
+          </div>
         </div>
       </div>
   
       <div class="mb-3">
         <label for="dateOfBirth" class="form-label">Date of Birth <span *ngIf="!isEditMode" class="text-danger">*</span></label>
-        <input type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
+        <input appFormValidation type="date" class="form-control" id="dateOfBirth" [(ngModel)]="user.dateOfBirth" name="dateOfBirth" required>
+        <div class="invalid-feedback">
+          Please provide a valid date of birth.
+        </div>
       </div>
   
       <div class="mb-3">
