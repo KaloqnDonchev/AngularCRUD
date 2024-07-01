@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .user-image {
     width: 60px;
     height: 60px;
@@ -9,13 +11,15 @@
 
 .edit-button {
     margin-right: 5%;
+    background-color: $primary-color;
+    color: $light-color;
 }
 
 .table-responsive {
     overflow-x: auto;
   }
   
-  @media (max-width: 1024px) {
+  @include below($screen-lg) {
     .table {
       display: flex;
       flex-direction: column;
@@ -43,7 +47,7 @@
       justify-content: space-evenly;
       padding: 0.5rem 0;
       border: 1px solid;
-      border-color: inherit;;
+      border-color: inherit;
     }
   
     .table tbody tr td::before {

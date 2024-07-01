@@ -50,7 +50,7 @@
           <td data-label="Date of Birth">{{ user.dateOfBirth | date: 'shortDate' }}</td>
           <td data-label="Age">{{ calculateAge(user.dateOfBirth) }}</td>
           <td data-label="Actions">
-            <a [routerLink]="['/edit-user', user.id]" class="edit-button btn btn-primary btn-sm">Edit</a>
+            <a [routerLink]="['/edit-user', user.id]" class="edit-button btn btn-sm">Edit</a>
             <button class="btn btn-danger btn-sm" (click)="openDeleteModal(user.id)">Delete</button>
           </td>
         </tr>

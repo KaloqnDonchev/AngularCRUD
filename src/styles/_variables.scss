@@ -1,0 +1,17 @@
+$primary-color: #007bff;
+$light-color: #f8f9fa;
+$background-hover-color: #d67bed;
+
+$screen-lg: 1024px;
+
+@mixin above($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin below($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
