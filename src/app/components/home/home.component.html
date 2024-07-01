@@ -43,9 +43,9 @@
             <img *ngIf="user.image" [src]="user.image" alt="User Image" class="user-image">
             <span *ngIf="!user.image">No Image</span>
           </td>
-          <td data-label="First Name">{{ user.firstName }}</td>
-          <td data-label="Last Name">{{ user.lastName }}</td>
-          <td data-label="Profession">{{ user.profession }}</td>
+          <td data-label="First Name">{{ user.firstName | capitalizeFirstLetter}}</td>
+          <td data-label="Last Name">{{ user.lastName | capitalizeFirstLetter}}</td>
+          <td data-label="Profession">{{ user.profession | capitalizeFirstLetter}}</td>
           <td data-label="Gender">{{ user.gender }}</td>
           <td data-label="Date of Birth">{{ user.dateOfBirth | date: 'shortDate' }}</td>
           <td data-label="Age">{{ calculateAge(user.dateOfBirth) }}</td>

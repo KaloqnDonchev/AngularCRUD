@@ -4,13 +4,14 @@ import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CapitalizeFirstLetterPipe } from '../../pipes/capitalizeFirstLetter.pipe';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, CapitalizeFirstLetterPipe],
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
