@@ -11,5 +11,5 @@
     <td data-label="Age">{{ user.dateOfBirth | calculateAge }}</td>
     <td data-label="Actions">
         <a [routerLink]="['/edit-user', user.id]" class="edit-button btn btn-sm">Edit</a>
-        <button class="btn btn-danger btn-sm" (click)="openDeleteModal(user.id)">Delete</button>
+        <button class="btn btn-danger btn-sm" (click)="onDelete()">Delete</button>
     </td>

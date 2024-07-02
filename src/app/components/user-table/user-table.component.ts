@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../../models/user.model';
 import { RouterModule } from '@angular/router';
 import { CalculateAgePipe } from '../../pipes/calculate-age.pipe';
@@ -19,5 +19,9 @@ import { CapitalizeFirstLetterPipe } from '../../pipes/capitalizeFirstLetter.pip
 })
 export class UserTableComponent {
   @Input() user!: User;
-  @Input() openDeleteModal!: (userId: string) => void;
+  @Output() deleteUser: EventEmitter<string> = new EventEmitter<string>();
+
+  onDelete() {
+    this.deleteUser.emit(this.user.id);
+  }
 }

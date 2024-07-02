@@ -38,7 +38,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of paginatedUsers" app-user-table [openDeleteModal]='openDeleteModal' [user]='user'>
+        <tr *ngFor="let user of paginatedUsers" app-user-table (deleteUser)="openDeleteModal($event)" [user]='user'>
         </tr>
       </tbody>
     </table>
