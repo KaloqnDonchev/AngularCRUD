@@ -1,0 +1,34 @@
+@import "../../../styles/variables";
+
+.user-image {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  margin: auto;
+}
+
+.edit-button {
+  margin-right: 0.4rem;
+  background-color: $primary-color;
+  color: $light-color;
+}
+
+@include below($screen-lg) {
+  td {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0.5rem 0;
+    border: 1px solid;
+    border-color: inherit;
+    padding-right: 1rem;
+
+    &::before {
+      content: attr(data-label);
+      font-weight: bold;
+      flex: 1;
+      margin-left: 1rem;
+    }
+  }
+}

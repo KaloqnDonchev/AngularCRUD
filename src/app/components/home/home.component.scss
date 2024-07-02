@@ -1,64 +1,29 @@
-@import '../../../styles/variables';
-
-.user-image {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 50%;
-    display:block;
-    margin:auto;
-}
-
-.edit-button {
-    margin-right: 5%;
-    background-color: $primary-color;
-    color: $light-color;
-}
+@import "../../../styles/variables";
 
 .table-responsive {
-    overflow-x: auto;
-  }
-  
-  @include below($screen-lg) {
-    .table {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    .table thead {
+  overflow-x: auto;
+}
+
+@include below($screen-lg) {
+  .table {
+    display: flex;
+    flex-direction: column;
+
+    thead {
       display: none;
     }
-  
-    .table tbody {
+
+    tbody {
       display: flex;
       flex-direction: column;
     }
-  
-    .table tbody tr {
+
+    tr {
       display: flex;
       flex-direction: column;
       border: 1px solid;
       border-color: inherit;
       margin-bottom: 1.5rem;
     }
-  
-    .table tbody tr td {
-      display: flex;
-      justify-content: space-evenly;
-      padding: 0.5rem 0;
-      border: 1px solid;
-      border-color: inherit;
-    }
-  
-    .table tbody tr td::before {
-      content: attr(data-label);
-      font-weight: bold;
-      flex: 1;
-      margin-left: 3%;
-    }
-
-    .table tbody tr td {
-        padding-right: 3%;
-    }
   }
-  
+}

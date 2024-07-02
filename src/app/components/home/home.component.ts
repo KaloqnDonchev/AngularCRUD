@@ -5,13 +5,22 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CapitalizeFirstLetterPipe } from '../../pipes/capitalizeFirstLetter.pipe';
+import { CalculateAgePipe } from '../../pipes/calculate-age.pipe';
+import { UserTableComponent } from '../user-table/user-table.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, CapitalizeFirstLetterPipe],
+  imports: [
+    CommonModule,
+    RouterModule,
+    FormsModule,
+    CapitalizeFirstLetterPipe,
+    CalculateAgePipe,
+    UserTableComponent,
+  ],
 })
 export class HomeComponent implements OnInit {
   users: User[] = [];
@@ -22,7 +31,6 @@ export class HomeComponent implements OnInit {
   pages: number[] = [];
   userIdToDelete: string | null = null;
   successMessage: string = '';
-
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
@@ -80,19 +88,5 @@ export class HomeComponent implements OnInit {
         this.successMessage = 'User deleted successfully!';
       });
     }
-  }
-
-  calculateAge(dateOfBirth: Date): number {
-    const birthDate = new Date(dateOfBirth);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-    if (
-      monthDifference < 0 ||
-      (monthDifference === 0 && today.getDate() < birthDate.getDate())
-    ) {
-      age--;
-    }
-    return age;
   }
 }
